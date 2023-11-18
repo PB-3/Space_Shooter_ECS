@@ -30,6 +30,7 @@ namespace space_shooter::ecs {
             input.switch_scene_level = false;
             input.switch_scene_exit = false;
             input.switch_scene_menu = false;
+            input.shooting = false;
 
             // Detect key pressed with SFML and set the boolean state accordingly
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -51,18 +52,20 @@ namespace space_shooter::ecs {
             {
                 input.switch_scene_level = true;
                 
-                std::cout << "level true";
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
             {
                 input.switch_scene_menu = true;
-                std::cout << "menu true";
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             {
                 input.switch_scene_exit = true;
-                std::cout << "exit true";
             }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            {
+                input.shooting = true;
+            }
+
         }
     }
 

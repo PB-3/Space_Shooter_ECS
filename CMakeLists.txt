@@ -45,11 +45,17 @@ set(SOURCE_FILES
     src/space-shooter/ecs/entites/background.cpp
     src/space-shooter/ecs/entites/player_ship.cpp
     src/space-shooter/ecs/entites/scene_entity.cpp
+    src/space-shooter/ecs/entites/player_missile.cpp
+    src/space-shooter/ecs/entites/enemy_ship.cpp
+    src/space-shooter/ecs/entites/enemy_spawner.cpp
     # Systems
     src/space-shooter/ecs/systems/input_system.cpp
     src/space-shooter/ecs/systems/rendering_system.cpp
     src/space-shooter/ecs/systems/movement_system.cpp
     src/space-shooter/ecs/systems/scene_system.cpp
+    src/space-shooter/ecs/systems/shooting_system.cpp
+    src/space-shooter/ecs/systems/clock_system.cpp
+    src/space-shooter/ecs/systems/enemy_spawn_system.cpp
 
     )
 

@@ -33,17 +33,14 @@ namespace space_shooter::ecs {
             if (input.switch_scene_menu)
             {
                 manager.gameState().switch_to_scene = GameState::Scene::Menu;
-                std::cout << "system menu";
             }
             if (input.switch_scene_level)
             {
                 manager.gameState().switch_to_scene = GameState::Scene::Level;
-                std::cout << "system levle";
             }
             if (input.switch_scene_exit)
             {
                 manager.gameState().switch_to_scene = GameState::Scene::Exit;
-                std::cout << "system exoit";
             }
         }
     }

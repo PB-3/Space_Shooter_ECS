@@ -31,6 +31,7 @@ void RenderingSystem::update(const sf::Time &delta_time ,
 
          tex.texture.loadFromFile(tex.texture_path.string());
          tex.loaded = true;
+         
         
      }
      sf::Sprite sp(tex.texture);

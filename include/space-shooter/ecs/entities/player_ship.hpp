@@ -15,6 +15,8 @@ public:
   PlayerShipEntity(sf::Vector2f pos, const std::filesystem::path &texture_path,
                    sf::Vector2f velocity);
   PlayerShipEntity() = delete;
+    sf::Vector2f pos;
+
 
   using Entity::Entity;
 };

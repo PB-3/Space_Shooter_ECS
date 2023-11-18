@@ -2,6 +2,8 @@
 #include <space-shooter/ecs/ecs.hpp>
 #include <space-shooter/game_state.hpp>
 #include <space-shooter/version.hpp>
+#include <space-shooter/ecs/systems/clock_system.hpp>
+
 
 // EXTERNAL HEADERS HERE
 #include <SFML/Graphics.hpp>
@@ -39,6 +41,7 @@ int main() {
     }
     
     window->clear();
+    
 
     // call update on all registered systems
     manager.update(clock.restart());

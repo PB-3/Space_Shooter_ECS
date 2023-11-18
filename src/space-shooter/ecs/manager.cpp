@@ -4,6 +4,9 @@
 #include <space-shooter/scenes/all.hpp>
 #include <space-shooter/utils.hpp>
 
+#include <space-shooter/ecs/components/tag_component.hpp>
+#include <space-shooter/ecs/components/position_component.hpp>
+
 #include <SFML/System/Time.hpp>
 
 #include <algorithm>

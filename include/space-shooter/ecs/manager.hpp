@@ -104,6 +104,7 @@ public:
   void disableAllSystems();
   void enableAllSystems();
 
+
 private:
   std::vector<Entity *> filterEntitiesForSystem(System *system);
   void triggerSceneChange();
