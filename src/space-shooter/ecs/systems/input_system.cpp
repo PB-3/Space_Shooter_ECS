@@ -31,6 +31,8 @@ namespace space_shooter::ecs {
             input.switch_scene_exit = false;
             input.switch_scene_menu = false;
             input.shooting = false;
+            input.pause = false;
+            input.resume = false;
 
             // Detect key pressed with SFML and set the boolean state accordingly
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -57,14 +59,19 @@ namespace space_shooter::ecs {
             {
                 input.switch_scene_menu = true;
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+          /*  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             {
-                input.switch_scene_exit = true;
-            }
+                input.pause = true;
+            }*/
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             {
                 input.shooting = true;
             }
+           /* if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+            {
+                input.resume = true;
+                
+            }*/
 
         }
     }

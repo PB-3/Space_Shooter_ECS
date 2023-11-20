@@ -103,6 +103,7 @@ public:
   void clearAll();
   void disableAllSystems();
   void enableAllSystems();
+  void killEntity();
 
 
 private:

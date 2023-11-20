@@ -38,8 +38,11 @@ struct GameState {
   bool running;
   bool keep_entities;
   bool keep_systems;
+
+
 };
 
 std::unique_ptr<GameState> initGameState(const GameConfig &game_config);
+
 
 } // namespace space_shooter

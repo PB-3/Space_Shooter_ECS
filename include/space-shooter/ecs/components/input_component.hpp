@@ -17,6 +17,8 @@ struct InputComponent : Component {
   bool switch_scene_menu = false;
   bool switch_scene_level = false;
   bool switch_scene_exit = false;
+  bool pause = false;
+  bool resume = false;
   InputComponent() = default;
 
 };

@@ -24,6 +24,7 @@ void MovementSystem::update(const sf::Time &delta_time,
 
 
     for (auto e : entities) {
+        
         assert(hasRequiredComponents(*e));
 
         const auto& vel = e->get<VelocityComponent>();
@@ -83,6 +84,14 @@ void MovementSystem::update(const sf::Time &delta_time,
             
 
        
+        }
+        if (tag.TagName == "EnemyMissile") {
+
+            pos.y += vel.vy * delta_time.asSeconds();
+
+            if (pos.y > manager.gameState().height) {
+                e->kill();
+            }
         }
   }
 }

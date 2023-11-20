@@ -7,6 +7,7 @@
 #include <space-shooter/ecs/components/tag_component.hpp>
 #include <space-shooter/ecs/components/position_component.hpp>
 
+#include <space-shooter/ecs/entities/background.hpp>
 #include <SFML/System/Time.hpp>
 
 #include <algorithm>
@@ -107,6 +108,7 @@ void Manager::triggerSceneChange() {
   
   // launch the scene switch
   
+
   switch (switch_to_scene) {
   case GameState::Scene::Level:
     initLevel(*this);
@@ -118,7 +120,9 @@ void Manager::triggerSceneChange() {
   case GameState::Scene::Menu:
       Menu(*this);
     break;
-
+  case GameState::Scene::Pause:
+      Pause(*this);
+      break;
   default:
     Menu(*this);
     break;

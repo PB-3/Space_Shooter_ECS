@@ -1,13 +1,6 @@
 #include <space-shooter/ecs/entities/enemy_ship.hpp>
 
-#include <space-shooter/ecs/components/input_component.hpp>
-#include <space-shooter/ecs/components/position_component.hpp>
-#include <space-shooter/ecs/components/sprite_component.hpp>
-#include <space-shooter/ecs/components/texture_component.hpp>
-#include <space-shooter/ecs/components/velocity_component.hpp>
-#include <space-shooter/ecs/components/tag_component.hpp>
-#include <space-shooter/ecs/components/cooldown_component.hpp>
-#include <space-shooter/ecs/components/clock_component.hpp>
+#include <space-shooter/ecs/components/all.hpp>
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Time.hpp>
@@ -23,8 +16,9 @@ namespace space_shooter::ecs {
         add<TextureComponent>(texture_path);
         add<SpriteComponent>(50, 20, SpriteComponent::Resize::Scale);
         add<VelocityComponent>(velocity.x, velocity.y);
-        add<CooldownComponent>(sf::seconds(1));
+        add<CooldownComponent>(sf::seconds(10));
         add<ClockComponent>();
+        add<HealthComponent>(10);
         add<TagComponent>("EnemyShip");
 
 

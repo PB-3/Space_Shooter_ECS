@@ -37,6 +37,7 @@ set(SOURCE_FILES
     src/space-shooter/scenes/exit.cpp
     src/space-shooter/scenes/level.cpp
     src/space-shooter/scenes/menu.cpp
+    src/space-shooter/scenes/scene_pause.cpp
     # Core of ECS
     src/space-shooter/ecs/entity.cpp
     src/space-shooter/ecs/system.cpp
@@ -48,6 +49,9 @@ set(SOURCE_FILES
     src/space-shooter/ecs/entites/player_missile.cpp
     src/space-shooter/ecs/entites/enemy_ship.cpp
     src/space-shooter/ecs/entites/enemy_spawner.cpp
+    src/space-shooter/ecs/entites/level_timer.cpp
+    src/space-shooter/ecs/entites/pause_menu.cpp
+    src/space-shooter/ecs/entites/enemy_missile.cpp
     # Systems
     src/space-shooter/ecs/systems/input_system.cpp
     src/space-shooter/ecs/systems/rendering_system.cpp
@@ -56,6 +60,13 @@ set(SOURCE_FILES
     src/space-shooter/ecs/systems/shooting_system.cpp
     src/space-shooter/ecs/systems/clock_system.cpp
     src/space-shooter/ecs/systems/enemy_spawn_system.cpp
+    src/space-shooter/ecs/systems/timer_system.cpp
+    src/space-shooter/ecs/systems/text_rendering_system.cpp
+    src/space-shooter/ecs/systems/switch_to_pause_menu_system.cpp
+    src/space-shooter/ecs/systems/collision_system.cpp
+    src/space-shooter/ecs/systems/enemy_chasing_system.cpp
+    src/space-shooter/ecs/systems/cleankillship_system.cpp
+    src/space-shooter/ecs/systems/enemy_shooting_system.cpp
 
     )
 
