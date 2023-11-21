@@ -15,7 +15,7 @@ namespace space_shooter::ecs {
                 auto& audio = e->get<AudioComponent>();
                 if (audio.playSound && audio.sound.getStatus() != sf::Sound::Playing) {
                     audio.sound.play();
-                    audio.playSound = false; // Réinitialiser le flag
+                    audio.playSound = false; 
                 }
             }
         }

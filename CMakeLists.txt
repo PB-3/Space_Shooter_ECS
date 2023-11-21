@@ -99,6 +99,11 @@ target_link_libraries(space-shooter PRIVATE sfml-system sfml-window sfml-network
 # Adress + leak sanitizer !
 if (MSVC)
     add_compile_options(/W4 /WX /permissive-)
+        # Copier le fichier DLL dans le dossier de sortie après la construction
+    add_custom_command(TARGET space-shooter POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                       "${PROJECT_SOURCE_DIR}/SFML-2.6.0/bin/OpenAL32.dll"
+                       $<TARGET_FILE_DIR:space-shooter>)
 
 # (OPTIONAL) TOGGLE ADRESS SANITIZER HERE
     add_compile_options(/fsanitize=address)

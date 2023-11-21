@@ -72,7 +72,14 @@ namespace space_shooter::ecs {
                 input.resume = true;
                 
             }*/
-
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
+            {
+                input.volumeUp = true;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2))
+            {
+                input.volumeDown = true;
+            }
         }
     }
 
