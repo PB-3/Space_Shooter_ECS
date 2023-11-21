@@ -1,6 +1,7 @@
 #include <space-shooter/scenes/level.hpp>
 #include <space-shooter/ecs/entities/player_ship.hpp>
 #include <space-shooter/ecs/entities/player_missile.hpp>
+#include <space-shooter/ecs/entities/player_ship_healthbar.hpp>
 #include <space-shooter/ecs/ecs.hpp>
 #include <iostream>
 
@@ -24,12 +25,12 @@ void initLevel(ecs::Manager &manager) {
 	//	manager.registerSystem<ecs::SwitchToPauseMenuSystem>();
 		manager.registerSystem<ecs::CleanKilledShipsSystem>();
 		manager.registerSystem<ecs::CollisionSystem>();
+		manager.registerSystem<ecs::HealthBarDisplaySystem>();
 
 		// Registering Entity
 		manager.registerEntity<ecs::SceneEntity>();
 		manager.registerEntity<ecs::LevelTimerEntity>(sf::Time(sf::seconds(60)));
 		manager.registerEntity<ecs::PauseMenuEntity>();
-
 
 
 		//Background
@@ -44,13 +45,19 @@ void initLevel(ecs::Manager &manager) {
 		texture_path = manager.gameState().config.path_to_textures / "shuttle.png";
 		manager.registerEntity<ecs::PlayerShipEntity>(pos, texture_path, velocity);
 
+		//Health bar
+		sf::Vector2f positionHealthBar(700, 0); // Position de la barre de santé
+		float maxWidthHealthBar = 200; // Largeur maximale de la barre de santé
+		manager.registerEntity<ecs::PlayerShipHealthBar>(positionHealthBar, maxWidthHealthBar);
+		//std::cout << "PlayerShipHealthBar entity registered at position: " << positionHealthBar.x << ", " << positionHealthBar.y << " with width: " << maxWidthHealthBar << std::endl; 
+		// le debug marche bien
+		
+
 		//Enemy Spawner
 		sf::Vector2f EnemySpawnerPos(100, 50);
 		std::filesystem::path texture_enemy;
 		texture_enemy = manager.gameState().config.path_to_textures / "enemy.jpg";
 		manager.registerEntity<ecs::EnemySpawnerEntity>(EnemySpawnerPos, texture_enemy);
-
-
 
 		// End Init Level
 		manager.gameState().switch_to_scene = GameState::Scene::None;

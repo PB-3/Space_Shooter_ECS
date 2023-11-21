@@ -47,26 +47,34 @@ void Manager::update(const sf::Time &delta_time) {
                 [](const auto &entity) { return !entity->isAlive(); });
 }
 
-std::vector<Entity *> Manager::filterEntitiesForSystem(System *system) {
-  std::vector<Entity *> relevant_entities;
+std::vector<Entity*> Manager::filterEntitiesForSystem(System* system) {
+    std::vector<Entity*> relevant_entities;
 
-  const auto &requirements = system->getRequiredComponents();
-  for (auto &entity : entities_) {
-    bool all_components_found = true;
+    const auto& requirements = system->getRequiredComponents();
+    // std::cout << "Filtrage des entités pour le système: " << typeid(*system).name() << std::endl;
 
-    for (auto &requirement : requirements) {
-      if (!entity->hasComponentWithID(requirement)) {
-        all_components_found = false;
-        break;
-      }
+    for (auto& entity : entities_) {
+        bool all_components_found = true;
+
+        for (auto& requirement : requirements) {
+            if (!entity->hasComponentWithID(requirement)) {
+                all_components_found = false;
+                break;
+            }
+        }
+
+        if (all_components_found) {
+            relevant_entities.push_back(entity.get());
+            // Affichage du tag de l'entité pour le débogage
+            if (entity->has<TagComponent>()) {
+                // std::cout << "  Entité sélectionnée: Tag = " << entity->get<TagComponent>().TagName << std::endl;
+            }
+        }
     }
 
-    if (all_components_found) {
-      relevant_entities.push_back(entity.get());
-    }
-  }
+    // std::cout << "Nombre total d'entités passées: " << relevant_entities.size() << std::endl;
 
-  return relevant_entities;
+    return relevant_entities;
 }
 
 void Manager::clearEntities() { entities_.clear(); }

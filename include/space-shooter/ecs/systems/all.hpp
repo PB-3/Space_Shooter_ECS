@@ -14,3 +14,4 @@
 #include <space-shooter/ecs/systems/enemy_chasing_system.hpp>
 #include <space-shooter/ecs/systems/cleankilledship_system.hpp>
 #include <space-shooter/ecs/systems/enemy_shooting_system.hpp>
+#include <space-shooter/ecs/systems/healthbardisplay_system.hpp>

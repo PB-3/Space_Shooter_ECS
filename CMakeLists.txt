@@ -52,6 +52,8 @@ set(SOURCE_FILES
     src/space-shooter/ecs/entites/level_timer.cpp
     src/space-shooter/ecs/entites/pause_menu.cpp
     src/space-shooter/ecs/entites/enemy_missile.cpp
+    src/space-shooter/ecs/entites/player_ship_healthbar.cpp
+
     # Systems
     src/space-shooter/ecs/systems/input_system.cpp
     src/space-shooter/ecs/systems/rendering_system.cpp
@@ -67,6 +69,7 @@ set(SOURCE_FILES
     src/space-shooter/ecs/systems/enemy_chasing_system.cpp
     src/space-shooter/ecs/systems/cleankillship_system.cpp
     src/space-shooter/ecs/systems/enemy_shooting_system.cpp
+    src/space-shooter/ecs/systems/healthbardisplay_system.cpp
 
     )
 
