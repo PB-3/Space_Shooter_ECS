@@ -15,3 +15,5 @@
 #include <space-shooter/ecs/systems/cleankilledship_system.hpp>
 #include <space-shooter/ecs/systems/enemy_shooting_system.hpp>
 #include <space-shooter/ecs/systems/healthbardisplay_system.hpp>
+#include <space-shooter/ecs/systems/audio_system.hpp>
+#include <space-shooter/ecs/systems/music_system.hpp>

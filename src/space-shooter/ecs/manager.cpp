@@ -108,11 +108,13 @@ void Manager::triggerSceneChange() {
     clearSystems();
   }
 
+
   auto switch_to_scene = game_state_->switch_to_scene;
 
   game_state_->keep_entities = false;
   game_state_->keep_systems = false;
   game_state_->switch_to_scene = GameState::Scene::None;
+
   
   // launch the scene switch
   
@@ -137,4 +139,23 @@ void Manager::triggerSceneChange() {
   }
 }
 
+// gestion audio
+void Manager::loadSoundEffect(const std::string& name, const std::string& filepath) {
+    sf::SoundBuffer buffer;
+    if (buffer.loadFromFile(filepath)) {
+        soundBuffers[name] = buffer;
+    }
+}
+
+sf::SoundBuffer& Manager::getSoundEffect(const std::string& name) {
+    return soundBuffers.at(name);
+}
+
+void Manager::loadBackgroundMusic(const std::string& filepath) {
+    backgroundMusic.openFromFile(filepath);
+}
+
+sf::Music& Manager::getBackgroundMusic() {
+    return backgroundMusic;
+}
 } // namespace space_shooter::ecs

@@ -53,6 +53,8 @@ set(SOURCE_FILES
     src/space-shooter/ecs/entites/pause_menu.cpp
     src/space-shooter/ecs/entites/enemy_missile.cpp
     src/space-shooter/ecs/entites/player_ship_healthbar.cpp
+    src/space-shooter/ecs/entites/background_music.cpp
+    src/space-shooter/ecs/entites/soundeffects.cpp
 
     # Systems
     src/space-shooter/ecs/systems/input_system.cpp
@@ -70,6 +72,8 @@ set(SOURCE_FILES
     src/space-shooter/ecs/systems/cleankillship_system.cpp
     src/space-shooter/ecs/systems/enemy_shooting_system.cpp
     src/space-shooter/ecs/systems/healthbardisplay_system.cpp
+    src/space-shooter/ecs/systems/audio_system.cpp
+    src/space-shooter/ecs/systems/music_system.cpp
 
     )
 
@@ -126,4 +130,15 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMENT "Packaging game and assets into space-shooter.zip"
 )
+
+# Après la définition de votre cible (add_executable) //pour qu'il trouve le fichier OpenAL32.dll qu'il arrive pas
+if (MSVC AND SFML_STATIC_LIBRARIES)
+    # Assurez-vous que le chemin est correct pour les DLL de SFML
+    set(SFML_DLL_DIR "${PROJECT_SOURCE_DIR}/SFML-2.6.0/bin")
+
+    # Copie des DLL SFML dans le répertoire de sortie
+    add_custom_command(TARGET space-shooter POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${SFML_DLL_DIR}" $<TARGET_FILE_DIR:space-shooter>)
+endif()
 

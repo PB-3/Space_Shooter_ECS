@@ -26,6 +26,8 @@ void initLevel(ecs::Manager &manager) {
 		manager.registerSystem<ecs::CleanKilledShipsSystem>();
 		manager.registerSystem<ecs::CollisionSystem>();
 		manager.registerSystem<ecs::HealthBarDisplaySystem>();
+		manager.registerSystem<ecs::AudioSystem>();
+		manager.registerSystem<ecs::MusicSystem>();
 
 		// Registering Entity
 		manager.registerEntity<ecs::SceneEntity>();
@@ -37,6 +39,14 @@ void initLevel(ecs::Manager &manager) {
 		std::filesystem::path texture_background;
 		texture_background = manager.gameState().config.path_to_textures / "solary.jpg";
 		manager.registerEntity<ecs::BackgroundEntity>(texture_background, 900, 900);
+
+		// Charger la musique de fond
+		std::filesystem::path backgroundMusicPath = manager.gameState().config.path_to_audio / "background_music.mp3";
+		manager.loadBackgroundMusic(backgroundMusicPath.string());
+
+		// Jouer la musique de fond
+		sf::Music& backgroundMusic = manager.getBackgroundMusic();
+		backgroundMusic.play();
 
 		//PlayerShip
 		sf::Vector2f pos(300, 300);
@@ -50,7 +60,6 @@ void initLevel(ecs::Manager &manager) {
 		float maxWidthHealthBar = 200; // Largeur maximale de la barre de santé
 		manager.registerEntity<ecs::PlayerShipHealthBar>(positionHealthBar, maxWidthHealthBar);
 		//std::cout << "PlayerShipHealthBar entity registered at position: " << positionHealthBar.x << ", " << positionHealthBar.y << " with width: " << maxWidthHealthBar << std::endl; 
-		// le debug marche bien
 		
 
 		//Enemy Spawner

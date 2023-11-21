@@ -2,12 +2,15 @@
 
 #include <space-shooter/ecs/entity.hpp>
 #include <space-shooter/ecs/system.hpp>
+#include <SFML/Audio.hpp>
 
 #include <functional>
 #include <memory>
 #include <optional>
 #include <type_traits>
 #include <vector>
+#include <unordered_map>
+#include <string>
 
 namespace space_shooter {
 
@@ -114,6 +117,19 @@ private:
   std::vector<std::unique_ptr<Entity>> entities_;
   std::vector<std::unique_ptr<System>> systems_;
   std::unique_ptr<GameState> game_state_;
+
+  // Gestion audio
+private:
+    std::unordered_map<std::string, sf::SoundBuffer> soundBuffers;
+    sf::Music backgroundMusic;
+
+public:
+    void loadSoundEffect(const std::string& name, const std::string& filepath);
+    sf::SoundBuffer& getSoundEffect(const std::string& name);
+
+    void loadBackgroundMusic(const std::string& filepath);
+    sf::Music& getBackgroundMusic();
+
 };
 
 } // namespace ecs

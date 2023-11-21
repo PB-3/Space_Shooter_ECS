@@ -9,3 +9,5 @@
 #include <space-shooter/ecs/entities/level_timer.hpp>
 #include <space-shooter/ecs/entities/pause_menu.hpp>
 #include <space-shooter/ecs/entities/player_ship_healthbar.hpp>
+#include <space-shooter/ecs/entities/background_music.hpp>
+#include <space-shooter/ecs/entities/soundeffects.hpp>
