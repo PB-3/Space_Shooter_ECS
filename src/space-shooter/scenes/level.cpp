@@ -40,13 +40,16 @@ void initLevel(ecs::Manager &manager) {
 		texture_background = manager.gameState().config.path_to_textures / "solary.jpg";
 		manager.registerEntity<ecs::BackgroundEntity>(texture_background, 900, 900);
 
-		// Charger la musique de fond
-		std::filesystem::path backgroundMusicPath = manager.gameState().config.path_to_audio / "background_music.mp3";
-		manager.loadBackgroundMusic(backgroundMusicPath.string());
+		//audio
+		 // Chemin du fichier de musique de fond
+		std::filesystem::path backgroundMusicPath;
+		backgroundMusicPath = manager.gameState().config.path_to_audio / "background_music.mp3";
+		manager.registerEntity<ecs::BackgroundMusic>(backgroundMusicPath.string());
 
-		// Jouer la musique de fond
-		sf::Music& backgroundMusic = manager.getBackgroundMusic();
-		backgroundMusic.play();
+		// audio tir allié
+		std::filesystem::path shootSoundPath = manager.gameState().config.path_to_audio / "player_shoot.wav";
+	    manager.registerEntity<ecs::SoundEffects>(shootSoundPath.string());
+
 
 		//PlayerShip
 		sf::Vector2f pos(300, 300);

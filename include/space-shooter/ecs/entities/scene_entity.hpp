@@ -10,7 +10,6 @@ namespace space_shooter::ecs {
     class SceneEntity : public Entity {
     public:
         SceneEntity();
-        
 
         using Entity::Entity;
     };

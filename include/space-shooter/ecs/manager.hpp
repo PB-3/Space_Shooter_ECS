@@ -118,18 +118,6 @@ private:
   std::vector<std::unique_ptr<System>> systems_;
   std::unique_ptr<GameState> game_state_;
 
-  // Gestion audio
-private:
-    std::unordered_map<std::string, sf::SoundBuffer> soundBuffers;
-    sf::Music backgroundMusic;
-
-public:
-    void loadSoundEffect(const std::string& name, const std::string& filepath);
-    sf::SoundBuffer& getSoundEffect(const std::string& name);
-
-    void loadBackgroundMusic(const std::string& filepath);
-    sf::Music& getBackgroundMusic();
-
 };
 
 } // namespace ecs

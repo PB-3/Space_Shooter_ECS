@@ -6,6 +6,9 @@
 namespace space_shooter::ecs {
     class BackgroundMusic : public Entity {
     public:
+        BackgroundMusic() = delete;
         BackgroundMusic(const std::string& musicFile);
+
+        using Entity::Entity;
     };
 }

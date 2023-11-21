@@ -1,10 +1,7 @@
 #include <space-shooter/ecs/systems/shooting_system.hpp>
+#include "space-shooter/ecs/systems/audio_system.hpp"
 
-#include <space-shooter/ecs/components/input_component.hpp>
-#include <space-shooter/ecs/components/tag_component.hpp>
-#include <space-shooter/ecs/components/position_component.hpp>
-#include <space-shooter/ecs/components/velocity_component.hpp>
-#include <space-shooter/ecs/components/cooldown_component.hpp>
+#include "space-shooter/ecs/components/all.hpp"
 
 #include <space-shooter/ecs/system.hpp>
 #include <space-shooter/ecs/manager.hpp>

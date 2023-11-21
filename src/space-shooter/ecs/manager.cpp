@@ -139,7 +139,7 @@ void Manager::triggerSceneChange() {
   }
 }
 
-// gestion audio
+/*// gestion audio
 void Manager::loadSoundEffect(const std::string& name, const std::string& filepath) {
     sf::SoundBuffer buffer;
     if (buffer.loadFromFile(filepath)) {
@@ -154,8 +154,10 @@ sf::SoundBuffer& Manager::getSoundEffect(const std::string& name) {
 void Manager::loadBackgroundMusic(const std::string& filepath) {
     backgroundMusic.openFromFile(filepath);
 }
-
+void Manager::stopBackgroundMusic() {
+    getBackgroundMusic().stop();
+}
 sf::Music& Manager::getBackgroundMusic() {
     return backgroundMusic;
-}
+}*/
 } // namespace space_shooter::ecs
