@@ -2,12 +2,15 @@
 
 #include <space-shooter/ecs/entity.hpp>
 #include <space-shooter/ecs/system.hpp>
+#include <SFML/Audio.hpp>
 
 #include <functional>
 #include <memory>
 #include <optional>
 #include <type_traits>
 #include <vector>
+#include <unordered_map>
+#include <string>
 
 namespace space_shooter {
 
@@ -114,6 +117,7 @@ private:
   std::vector<std::unique_ptr<Entity>> entities_;
   std::vector<std::unique_ptr<System>> systems_;
   std::unique_ptr<GameState> game_state_;
+
 };
 
 } // namespace ecs

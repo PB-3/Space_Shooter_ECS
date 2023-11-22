@@ -47,26 +47,34 @@ void Manager::update(const sf::Time &delta_time) {
                 [](const auto &entity) { return !entity->isAlive(); });
 }
 
-std::vector<Entity *> Manager::filterEntitiesForSystem(System *system) {
-  std::vector<Entity *> relevant_entities;
+std::vector<Entity*> Manager::filterEntitiesForSystem(System* system) {
+    std::vector<Entity*> relevant_entities;
 
-  const auto &requirements = system->getRequiredComponents();
-  for (auto &entity : entities_) {
-    bool all_components_found = true;
+    const auto& requirements = system->getRequiredComponents();
+    // std::cout << "Filtrage des entités pour le système: " << typeid(*system).name() << std::endl;
 
-    for (auto &requirement : requirements) {
-      if (!entity->hasComponentWithID(requirement)) {
-        all_components_found = false;
-        break;
-      }
+    for (auto& entity : entities_) {
+        bool all_components_found = true;
+
+        for (auto& requirement : requirements) {
+            if (!entity->hasComponentWithID(requirement)) {
+                all_components_found = false;
+                break;
+            }
+        }
+
+        if (all_components_found) {
+            relevant_entities.push_back(entity.get());
+            // Affichage du tag de l'entité pour le débogage
+            if (entity->has<TagComponent>()) {
+                // std::cout << "  Entité sélectionnée: Tag = " << entity->get<TagComponent>().TagName << std::endl;
+            }
+        }
     }
 
-    if (all_components_found) {
-      relevant_entities.push_back(entity.get());
-    }
-  }
+    // std::cout << "Nombre total d'entités passées: " << relevant_entities.size() << std::endl;
 
-  return relevant_entities;
+    return relevant_entities;
 }
 
 void Manager::clearEntities() { entities_.clear(); }
@@ -100,11 +108,13 @@ void Manager::triggerSceneChange() {
     clearSystems();
   }
 
+
   auto switch_to_scene = game_state_->switch_to_scene;
 
   game_state_->keep_entities = false;
   game_state_->keep_systems = false;
   game_state_->switch_to_scene = GameState::Scene::None;
+
   
   // launch the scene switch
   
@@ -132,4 +142,25 @@ void Manager::triggerSceneChange() {
   }
 }
 
+/*// gestion audio
+void Manager::loadSoundEffect(const std::string& name, const std::string& filepath) {
+    sf::SoundBuffer buffer;
+    if (buffer.loadFromFile(filepath)) {
+        soundBuffers[name] = buffer;
+    }
+}
+
+sf::SoundBuffer& Manager::getSoundEffect(const std::string& name) {
+    return soundBuffers.at(name);
+}
+
+void Manager::loadBackgroundMusic(const std::string& filepath) {
+    backgroundMusic.openFromFile(filepath);
+}
+void Manager::stopBackgroundMusic() {
+    getBackgroundMusic().stop();
+}
+sf::Music& Manager::getBackgroundMusic() {
+    return backgroundMusic;
+}*/
 } // namespace space_shooter::ecs
