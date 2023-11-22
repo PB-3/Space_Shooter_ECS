@@ -38,7 +38,7 @@ namespace space_shooter::ecs {
                     direction /= length;
 
                    
-                    float speed = 10.0f; 
+                    float speed = 50.0f; 
                     enemy_velocity.setVelocity(direction * speed);
 
                     enemy_position.x += enemy_velocity.vx * delta_time.asSeconds();

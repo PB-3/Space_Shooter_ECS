@@ -8,7 +8,6 @@ namespace space_shooter {
 
 void initLevel(ecs::Manager &manager) {
 	
-		std::cout << "initlevel\n";
 		// Registering Systems
 		manager.registerSystem<ecs::RenderingSystem>();
 		manager.registerSystem<ecs::InputSystem>();
@@ -21,15 +20,33 @@ void initLevel(ecs::Manager &manager) {
 		manager.registerSystem<ecs::TextRenderingSystem>();
 		manager.registerSystem<ecs::EnemyChasingSystem>();
 		manager.registerSystem<ecs::EnemyShootingSystem>();
-	//	manager.registerSystem<ecs::SwitchToPauseMenuSystem>();
 		manager.registerSystem<ecs::CleanKilledShipsSystem>();
 		manager.registerSystem<ecs::CollisionSystem>();
+		manager.registerSystem<ecs::ScoringSystem>();
+		manager.registerSystem<ecs::SwitchToScoreMenuSystem>();
+		manager.registerSystem<ecs::HealthBarDisplaySystem>();
+		manager.registerSystem<ecs::AudioSystem>();
+		manager.registerSystem<ecs::MusicSystem>();
 
 		// Registering Entity
-		manager.registerEntity<ecs::SceneEntity>();
-		manager.registerEntity<ecs::LevelTimerEntity>(sf::Time(sf::seconds(60)));
-		manager.registerEntity<ecs::PauseMenuEntity>();
 
+		//Scene 
+		manager.registerEntity<ecs::SceneEntity>();
+
+		// Level countdown
+		manager.registerEntity<ecs::LevelTimerEntity>(sf::Time(sf::seconds(60)));
+
+		//Display Score 
+		manager.registerEntity<ecs::ScoreDisplayEntity>();
+
+		//Audio background
+		std::filesystem::path backgroundMusicPath;
+		backgroundMusicPath = manager.gameState().config.path_to_audio / "background_music.mp3";
+		manager.registerEntity<ecs::BackgroundMusic>(backgroundMusicPath.string());
+
+		// Audio player shoot
+		std::filesystem::path shootSoundPath = manager.gameState().config.path_to_audio / "player_shoot.wav";
+		manager.registerEntity<ecs::SoundEffects>(shootSoundPath.string());
 
 
 		//Background
@@ -50,7 +67,11 @@ void initLevel(ecs::Manager &manager) {
 		texture_enemy = manager.gameState().config.path_to_textures / "enemy.jpg";
 		manager.registerEntity<ecs::EnemySpawnerEntity>(EnemySpawnerPos, texture_enemy);
 
-
+		//HealthBar
+		sf::Vector2f HealthBarPos(300, -150);
+		std::filesystem::path texture_health_bar;
+		texture_health_bar = manager.gameState().config.path_to_textures / "health_bar.png";
+		manager.registerEntity<ecs::PlayerShipHealthBar>(HealthBarPos, texture_health_bar);
 
 		// End Init Level
 		manager.gameState().switch_to_scene = GameState::Scene::None;

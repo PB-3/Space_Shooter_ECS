@@ -14,9 +14,9 @@ namespace space_shooter::ecs {
         add<PositionComponent>(pos.x, pos.y);
         add<InputComponent>();
         add<TextureComponent>(texture_path);
-        add<SpriteComponent>(50, 20, SpriteComponent::Resize::Scale);
+        add<SpriteComponent>(50, 67, SpriteComponent::Resize::Scale);
         add<VelocityComponent>(velocity.x, velocity.y);
-        add<CooldownComponent>(sf::seconds(10));
+        add<CooldownComponent>(sf::seconds(2));
         add<ClockComponent>();
         add<HealthComponent>(10);
         add<TagComponent>("EnemyShip");

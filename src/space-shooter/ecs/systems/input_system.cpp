@@ -59,10 +59,10 @@ namespace space_shooter::ecs {
             {
                 input.switch_scene_menu = true;
             }
-          /*  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             {
-                input.pause = true;
-            }*/
+                input.switch_scene_exit = true;
+            }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             {
                 input.shooting = true;

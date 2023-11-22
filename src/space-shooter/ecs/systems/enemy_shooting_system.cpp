@@ -32,7 +32,6 @@ namespace space_shooter::ecs {
             auto& pos = e->get<PositionComponent>();
             auto& cd = e->get<CooldownComponent>();
 
-            //std::cout<<tag.TagName<<std::endl;
             if (tag.TagName == "EnemyShip") {
                 cd.elapsed_time -= delta_time;
 
@@ -40,9 +39,7 @@ namespace space_shooter::ecs {
                     cd.elapsed_time = cd.cooldown_duration;
 
                     sf::Vector2f enemyPosition(pos.x, pos.y);
-                    sf::Vector2f missileVelocity(100, 100); // La vitesse vers le bas
-                    //std::cout << "Creating enemy missile with velocity: " << missileVelocity.x << ", " << missileVelocity.y << std::endl;
-                    //std::cout << "Cooldown remaining: " << cd.elapsed_time.asSeconds() << " seconds" << std::endl;
+                    sf::Vector2f missileVelocity(150, 150); 
                     std::filesystem::path texture_missile = manager.gameState().config.path_to_textures / "enemy_missile.png";
                     manager.registerEntity<ecs::EnemyMissileEntity>(enemyPosition, texture_missile, missileVelocity);
                 }

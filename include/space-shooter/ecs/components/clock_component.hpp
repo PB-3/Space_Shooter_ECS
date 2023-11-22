@@ -12,7 +12,7 @@ namespace space_shooter::ecs {
 		sf::Time delta_time;
 
 		ClockComponent(sf::Time delta_time) : elapsed_time(sf::Time::Zero), delta_time(delta_time) {}
-		ClockComponent() : elapsed_time(sf::Time::Zero), delta_time(sf::milliseconds(16)){}
+		ClockComponent() : elapsed_time(sf::Time::Zero), delta_time(sf::milliseconds(8)){}
 
 	};
 

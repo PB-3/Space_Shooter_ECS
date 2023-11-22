@@ -14,7 +14,7 @@ namespace space_shooter::ecs {
         add<PositionComponent>(pos.x, pos.y);
         add<InputComponent>();
         add<TextureComponent>(texture_path);
-        add<SpriteComponent>(50, 20, SpriteComponent::Resize::Scale);
+        add<SpriteComponent>(30, 33, SpriteComponent::Resize::Scale);
         add<VelocityComponent>(velocity.x, velocity.y);
         add<DamageComponent>(50);
         add<TagComponent>("PlayerMissile");

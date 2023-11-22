@@ -35,11 +35,16 @@ namespace space_shooter::ecs {
             
             if (tag.TagName == "EnemySpawner" && cd.elapsed_time == sf::Time::Zero)
             {
-                pos.x += 60;
+                if (pos.x < manager.gameState().width) {
+                    pos.x += 60;
+                }
+                if (pos.x > manager.gameState().width)
+                {
+                    pos.x = 0;
+                }
                 if (pos.x < 900) {
                     cd.elapsed_time = cd.cooldown_duration;
                     sf::Vector2f enemyPos(pos.x, pos.y);
-                    std::cout << "creation" <<pos.x<<","<<pos.y<< std::endl;
                     std::filesystem::path texture = manager.gameState().config.path_to_textures / "enemy.jpg";
                     manager.registerEntity<ecs::EnemyShipEntity>(enemyPos, texture, sf::Vector2f(100, 100));
                 }

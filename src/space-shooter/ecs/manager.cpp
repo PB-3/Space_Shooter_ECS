@@ -120,9 +120,12 @@ void Manager::triggerSceneChange() {
   case GameState::Scene::Menu:
       Menu(*this);
     break;
-  case GameState::Scene::Pause:
-      Pause(*this);
+  case GameState::Scene::GameOver:
+      GameOver(*this);
       break;
+  case GameState::Scene::Score:
+          Score(*this);
+          break;
   default:
     Menu(*this);
     break;

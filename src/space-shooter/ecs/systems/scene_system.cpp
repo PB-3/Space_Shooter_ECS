@@ -2,7 +2,10 @@
 
 //#include <space-shooter/ecs/components/scene_component.hpp>
 
-#include <space-shooter/ecs/components/input_component.hpp>
+#include <space-shooter/ecs/entities/player_ship.hpp>
+#include <space-shooter/ecs/components/tag_component.hpp>
+#include <space-shooter/ecs/entities/score_display.hpp>
+#include <space-shooter/ecs/components/all.hpp>
 #include <space-shooter/ecs/system.hpp>
 #include <space-shooter/ecs/manager.hpp>
 #include <space-shooter/game_state.hpp>
@@ -28,8 +31,10 @@ namespace space_shooter::ecs {
 
             const auto& input = e->get<InputComponent>();
             // const auto& scene_input = e->get<SceneCompoenent>();
+            auto player_health = manager.getFromEntity<ecs::PlayerShipEntity>(
+                [](auto& player) { return player.get<ecs::HealthComponent>().health; });
 
-            
+
             if (input.switch_scene_menu)
             {
                 manager.gameState().switch_to_scene = GameState::Scene::Menu;
@@ -42,6 +47,12 @@ namespace space_shooter::ecs {
             {
                 manager.gameState().switch_to_scene = GameState::Scene::Exit;
             }
+            if (player_health == 0)
+            {
+                manager.gameState().switch_to_scene = GameState::Scene::GameOver;
+            }
+           
+            
         }
     }
 

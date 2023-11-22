@@ -3,7 +3,7 @@
 #include <space-shooter/ecs/components/input_component.hpp>
 #include <space-shooter/ecs/components/tag_component.hpp>
 #include <space-shooter/ecs/components/position_component.hpp>
-#include <space-shooter/ecs/components/velocity_component.hpp>
+#include <space-shooter/ecs/components/audio_component.hpp>
 #include <space-shooter/ecs/components/cooldown_component.hpp>
 
 #include <space-shooter/ecs/system.hpp>
@@ -12,6 +12,7 @@
 #include <space-shooter/utils.hpp>
 
 #include <space-shooter/ecs/entities/player_missile.hpp>
+#include <space-shooter/ecs/entities/soundeffects.hpp>
 
 #include <SFML/Graphics.hpp>
 
@@ -49,6 +50,16 @@ namespace space_shooter::ecs {
                     texture_missile = manager.gameState().config.path_to_textures / "penguin.png";
                     manager.registerEntity<ecs::PlayerMissileEntity>(posShip, texture_missile, velocityM);
                     cd.elapsed_time = cd.cooldown_duration;
+                    // Trouver l'entité SoundEffects pour le tir
+                    auto shootSoundEffect = manager.getFromEntity<ecs::SoundEffects>([](ecs::SoundEffects& se) {
+                        return &se;
+                        });
+
+                    // Activer le flag playSound si l'entité est trouvée
+                    if (shootSoundEffect) {
+                        shootSoundEffect.value()->get<AudioComponent>().playSound = true;
+                    }
+
 
                 }
             }

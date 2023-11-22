@@ -1,29 +1,104 @@
-3..4 Scene Changing Feature (2-3pts)
+# Space_Shooter_ECS
 
-Pour implementer le changement de scene j'ai crée un nouveau systeme qui va gérer les scenes
-en fonction d'une input pour changer la scene pour l'instant j'ai mis des touches de clavier
-on verra par la suite. les transitions de scenes ne sont pas des mouvements donc j'ai mis ça
-dans un autre systeme. techniquement ça se rapproche du rendering vu que l'on change ce que 
-l'on souhaite afficher à l'écran mais bon je sais pas trop.
+## Description du Projet
 
-4..2 Shooting Feature for PlayerShip (2pts)
+Le projet Space_Shooter_ECS a pour objectif de développer un jeu en utilisant le modèle entité,
+composants, systèmes (ECS). Le jeu est un space shooter où le joueur contrôle un vaisseau spatial,
+visant à éliminer les ennemis qui approchent. Les ennemis apparaissent depuis un spawner,
+et le but ultime est de détruire ce spawner. Une fois le spawner détruit, le joueur remporte la partie.
+Les ennemis tirent des missiles, et le joueur doit les éviter tout en pouvant également tirer des missiles pour détruire les vaisseaux ennemis et les spawners.
 
-Création d'une entité missile, il faut utiliser un tag componenent "PlayerMissile" afin de 
-pouvoir le detecter dans le mouvement system afin de performer le déplacement du missile.
-D'abord l'input system detecte qu'on veut tirer puis il met l'input.shooting a true et 
-ensuite le shooting system va créer un missile le register dans le manager puis le mouvement
-system va déplacer le missile.
+## Options Implémentées
 
+### Menu Principal
+- **Aller/Retourner au menu :** Appuyer sur M
+- **Commencer le jeu :** Appuyer sur L
+- **Quitter le jeu :** Appuyer sur Echap
 
-4..3 Cooldown Between Missile Shots (2pts)
+### Commandes en Jeu
+- **Tirer avec le vaisseau :** Appuyer sur Espace
+- **Se déplacer avec le vaisseau :**
+  - Z, Q, S, D ou flèches Haut, Gauche, Bas, Droite : Avancer, Aller à gauche, Reculer, Aller à droite
+- ** Quiter le jeu : Appuyer sur Echap **
 
-Pour les cooldowns on a cree un cd component qui contient le cd max et le cd en cours
-ensuite il y a un clock system qui gère tant que le cd est pas à 0 il decrease le cd
-ensuite il le met a zero a la fin. si le cd est à Zero on peut créer un missile et on mets le
-cd à Zero. ce cooldown component est dans le PlayerShip.
+### Features ECS Implémentées
 
-j'ai également rajouté le clock system qui permet de gérer les updates etc
+#### 3..1 Rendering Feature (4pts)
+- Components : TextureComponent, PositionComponent, SpriteComponent
+- Entities : Toutes les entités nécessitant une représentation visuelle à l'écran
+- Systems : RenderingSystem
 
-4.a Enemy Ship Spawner (2pts)
- création d'un spawner qui fait spawn des ennemis en haut pr l'instant rien ne se passe ça fait
- juste apparaitre des ennemis. 
+#### 3..2 Background Image Display (2pts)
+- Components : TextureComponent
+- Entities : BackgroundEntity
+- Systems : RenderingSystem
+
+#### 3..3 Moving Feature (4pts)
+- Components : PositionComponent, VelocityComponent, InputComponent
+- Entities : PlayerShip
+- Systems : MovementSystem, InputSystem
+
+#### 4..1 Tag Feature for Entities (2pts)
+- Components : TagComponent
+- Entities : Toutes les entités nécessitant une classification
+- Systems : Tous les systèmes nécessitant cette balise (principalement le ColliderSystem)
+
+#### 4..2 Shooting Feature for PlayerShip (2pts)
+- Components : PositionComponent, VelocityComponent, TextureComponent, TagComponent
+- Entities : PlayerShip, PlayerMissile
+- Systems : ShootingSystem, MovementSystem, InputSystem
+
+#### 4..3 Cooldown Between Missile Shots (2pts)
+- Components : ClockComponent, CooldownComponent
+- Entities : PlayerShip, Missile
+- Systems : ClockSystem, ShootingSystem
+
+#### 4.a Enemy Ship Spawner (2pts)
+- Components : PositionComponent, CooldownComponent, ClockComponent, TextureComponent, TagComponent
+- Entities : EnemyShip, EnemySpawner
+- Systems : EnemySpawnSystem
+
+#### 4.b Enemy Shooting System (2pts)
+- Components : CooldownComponent, ClockComponent, PositionComponent, VelocityComponent, TextureComponent, TagComponent
+- Entities : EnemyShip, Missile
+- Systems : EnemyShootingSystem
+
+#### 4.c Collider and Health/Damage System (4pts)
+- Components : HealthComponent (vaissaux), DamageComponent (missile), TagComponent
+- Entities : PlayerShip, EnemyShip, Missile
+- Systems : CollisionSystem, CleanKilledShipsSystem
+
+#### 4.d Enemy Movement/Chase Feature (2pts)
+- Components : PositionComponent, VelocityComponent
+- Entities : EnemyShip
+- Systems : EnemyChasingSystem
+
+#### 4.e Player Death Detection (2pts)
+- Entities : PlayerShip
+- Systems : Collider
+- Core Code : GameState (pour gérer les changements de scène)
+
+#### 4.f Health Bar Display (2pts)
+- Components : HealthComponent, PositionComponent, TextureComponent, SpriteComponent
+- Entities : PlayerShipHealthBar
+- Systems : HealthBarDisplaySystem
+
+#### 4.g Countdown Timer (2pts)
+- Components : TimerComponent
+- Entities : LevelTimer
+- Systems : TimerSystem, TextRenderingSystem
+
+#### 4.h Scoring Mechanism (2pts)
+- Components : ScoreComponent
+- Entities : ScoreDisplay
+- Systems : ScoringSystem, SwitchToScoreSceneSystem
+
+#### 4.j Audio Integration (2–4pts)
+- Objectif : Ajouter des effets sonores et de la musique de fond pour améliorer le gameplay.
+- Components : AudioComponent, MusicComponent
+- Entities : BackgroundMusic, SoundEffects
+- Systems : AudioSystem, MusicSystem
+
+## Bugs Connus ou spécifications 
+
+- Les changements de scènes sont toutes traités dans un seul fichier qui est scene_system  pour le changement de scène entre le menu et le jeu ou lorsque le joueur n'a plus de points de vie. 

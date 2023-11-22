@@ -4,7 +4,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 
 project(SpaceShooter VERSION 0.1.0.0)
-set(POJECT_AUTHOR "YOUR NAME <YOUR.EMAIL@esiee.fr>")
+set(POJECT_AUTHOR "TERAY RAJ <raj.teray@edu.esiee.fr>")
 set(PROJECT_ASSETS_PATH "${PROJECT_SOURCE_DIR}/assets")
 
 set(CXX_STANDARD_REQUIRED 20)
@@ -37,7 +37,8 @@ set(SOURCE_FILES
     src/space-shooter/scenes/exit.cpp
     src/space-shooter/scenes/level.cpp
     src/space-shooter/scenes/menu.cpp
-    src/space-shooter/scenes/scene_pause.cpp
+    src/space-shooter/scenes/game_over.cpp
+    src/space-shooter/scenes/score.cpp
     # Core of ECS
     src/space-shooter/ecs/entity.cpp
     src/space-shooter/ecs/system.cpp
@@ -50,8 +51,14 @@ set(SOURCE_FILES
     src/space-shooter/ecs/entites/enemy_ship.cpp
     src/space-shooter/ecs/entites/enemy_spawner.cpp
     src/space-shooter/ecs/entites/level_timer.cpp
-    src/space-shooter/ecs/entites/pause_menu.cpp
     src/space-shooter/ecs/entites/enemy_missile.cpp
+    src/space-shooter/ecs/entites/score_display.cpp
+    src/space-shooter/ecs/entites/player_ship_health_bar.cpp
+    src/space-shooter/ecs/entites/soundeffects.cpp
+    src/space-shooter/ecs/entites/background_music.cpp
+    src/space-shooter/ecs/entites/text_entity.cpp
+
+
     # Systems
     src/space-shooter/ecs/systems/input_system.cpp
     src/space-shooter/ecs/systems/rendering_system.cpp
@@ -62,11 +69,16 @@ set(SOURCE_FILES
     src/space-shooter/ecs/systems/enemy_spawn_system.cpp
     src/space-shooter/ecs/systems/timer_system.cpp
     src/space-shooter/ecs/systems/text_rendering_system.cpp
-    src/space-shooter/ecs/systems/switch_to_pause_menu_system.cpp
     src/space-shooter/ecs/systems/collision_system.cpp
     src/space-shooter/ecs/systems/enemy_chasing_system.cpp
     src/space-shooter/ecs/systems/cleankillship_system.cpp
     src/space-shooter/ecs/systems/enemy_shooting_system.cpp
+    src/space-shooter/ecs/systems/switch_to_score_scene_system.cpp
+    src/space-shooter/ecs/systems/scoring_system.cpp
+    src/space-shooter/ecs/systems/health_bar_display_system.cpp
+    src/space-shooter/ecs/systems/audio_system.cpp
+    src/space-shooter/ecs/systems/music_system.cpp
+    
 
     )
 
@@ -92,6 +104,10 @@ target_link_libraries(space-shooter PRIVATE sfml-system sfml-window sfml-network
 # Adress + leak sanitizer !
 if (MSVC)
     add_compile_options(/W4 /WX /permissive-)
+     add_custom_command(TARGET space-shooter POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                       "${PROJECT_SOURCE_DIR}/SFML-2.6.0/bin/openal32.dll"
+                       $<TARGET_FILE_DIR:space-shooter>)
 
 # (OPTIONAL) TOGGLE ADRESS SANITIZER HERE
     add_compile_options(/fsanitize=address)

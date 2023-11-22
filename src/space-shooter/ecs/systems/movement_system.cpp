@@ -38,7 +38,6 @@ void MovementSystem::update(const sf::Time &delta_time,
         if (tag.TagName == "PlayerShip")
         {
 
-            //std::cout << pos.x << "," << pos.y << " pos mvmnt sys " << std::endl;
 
             if (input.move_bottom) {
                 if (pos.y > manager.gameState().height - 50)

@@ -8,6 +8,7 @@
 #include <space-shooter/ecs/components/tag_component.hpp>
 #include <space-shooter/ecs/components/cooldown_component.hpp>
 #include <space-shooter/ecs/components/clock_component.hpp>
+#include <space-shooter/ecs/components/health_component.hpp>
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Time.hpp>
@@ -21,9 +22,10 @@ namespace space_shooter::ecs {
         add<PositionComponent>(pos.x, pos.y);
         //add<InputComponent>();
         add<TextureComponent>(texture_path);
-        add<SpriteComponent>(50, 20, SpriteComponent::Resize::Scale);
-        add<CooldownComponent>(sf::seconds(5));
+        add<SpriteComponent>(50, 67, SpriteComponent::Resize::Scale);
+        add<CooldownComponent>(sf::seconds(1));
         add<ClockComponent>();
+        add<HealthComponent>(200);
         add<TagComponent>("EnemySpawner");
 
 
